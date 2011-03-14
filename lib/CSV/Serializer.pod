@@ -1,0 +1,73 @@
+=head1 NAME
+
+CSV::Serializer - A CSV Serializer
+
+=head1 SYNOPSIS
+
+  use CSV::Serializer;
+  
+  warn CSV::Serializer->serialize_line([$value1, $value2, $value3]);
+  
+  warn CSV::Serializer->serialize_lines([
+      [$value1, $value2, $value3],
+      [$value4, $value5, $value6, $value7],
+  ]);
+
+=head1 DESCRIPTION
+
+The C<CSV::Serializer> class is a CSV serializer that can generate a
+conforming C<text/csv> data.
+
+=head1 METHODS
+
+All methods are class methods.  Note that inputs and outputs of these
+methods are considered as character (i.e. utf8-flaged) strings.
+
+=over 4
+
+=item TEXT = CSV::Serializer->serialize_lines(DATA)
+
+Generates a CSV data from the input data.  The input data have to be
+an array reference (which represents the entire CSV data) of array
+references (which represents lines in the CSV).
+
+=item TEXT = CSV::Serializer->serialize_line(DATA)
+
+Generates a CSV line data, with trailing line break, from the input
+data.  The input data have to be an array reference which represents a
+line in CSV.
+
+=item TEXT = CSV::Serializer->serialize_record(DATA)
+
+Generates a CSV record, without trailing line break, from the input
+data.  The input data have to be an array reference which represents a
+line in CSV.
+
+=back
+
+=head1 SEE ALSO
+
+RFC 4180 <http://tools.ietf.org/html/rfc4180>.
+
+=head1 HISTORY
+
+=over 4
+
+=item 1.0 (2010-08-06)
+
+First version.
+
+=back
+
+=head1 AUTHOR
+
+Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
+
+=head1 LICENSE
+
+Copyright 2010 Hatena <http://www.hatena.ne.jp/>.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut

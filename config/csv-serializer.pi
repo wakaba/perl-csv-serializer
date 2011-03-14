@@ -1,0 +1,17 @@
+{
+    main_module_name => 'CSV::Serializer',
+    file_names => [qw(
+        lib/CSV/Serializer.pm
+        lib/CSV/Serializer.pod
+        t/csv-serializer.t
+        config/csv-serializer.pi
+    )],
+    req_modules => {
+
+    },
+    t_req_modules => {
+        'Path::Class' => 0,
+        'Test::More' => 0,
+        'Test::Class' => 0,
+    },
+};
