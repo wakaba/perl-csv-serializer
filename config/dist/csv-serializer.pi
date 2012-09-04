@@ -10,8 +10,15 @@
 
     },
     t_req_modules => {
-        'Path::Class' => 0,
         'Test::More' => 0,
-        'Test::Class' => 0,
+        'Test::X1' => 0,
+    },
+    urls => {
+        git => {
+            GitHub => q<https://github.com/wakaba/perl-csv-serializer>,
+        },
+        ci => {
+            "Travis CI" => q<http://travis-ci.org/wakaba/perl-csv-serializer>,
+        },
     },
 };
