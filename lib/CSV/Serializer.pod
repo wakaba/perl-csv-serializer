@@ -12,6 +12,10 @@ CSV::Serializer - A CSV Serializer
       [$value1, $value2, $value3],
       [$value4, $value5, $value6, $value7],
   ]);
+  
+  $csv = CSV::Serializer->new;
+  $csv->replace_newlines(1);
+  warn $csv->serialize_line([$value1, $value2, $value3]);
 
 =head1 DESCRIPTION
 
@@ -25,7 +29,15 @@ methods are considered as character (i.e. utf8-flaged) strings.
 
 =over 4
 
+=item $csv = CSV::Serializer->new
+
+Create a new instance of CSV serializer.  Although some methods below
+can be used as class method, you can instantiate the class such that
+options for serialization can be specified.
+
 =item TEXT = CSV::Serializer->serialize_lines(DATA)
+
+=item TEXT = $csv->serialize_lines(DATA)
 
 Generates a CSV data from the input data.  The input data have to be
 an array reference (which represents the entire CSV data) of array
@@ -33,15 +45,25 @@ references (which represents lines in the CSV).
 
 =item TEXT = CSV::Serializer->serialize_line(DATA)
 
+=item TEXT = $csv->serialize_line(DATA)
+
 Generates a CSV line data, with trailing line break, from the input
 data.  The input data have to be an array reference which represents a
 line in CSV.
 
 =item TEXT = CSV::Serializer->serialize_record(DATA)
 
+=item TEXT = $csv->serialize_record(DATA)
+
 Generates a CSV record, without trailing line break, from the input
 data.  The input data have to be an array reference which represents a
 line in CSV.
+
+=item $csv->replace_newlines(BOOL)
+
+If specified to a true value, any newline character (CR, LF, or CRLF
+sequence) is replaced by space character (SP).  Otherwise, they are
+left as is (within quote characters).
 
 =back
 
@@ -57,15 +79,24 @@ RFC 4180 <http://tools.ietf.org/html/rfc4180>.
 
 First version.
 
+=item 2.0 (2012-09-04)
+
+Added C<replace_newlines> option.
+
 =back
 
 =head1 AUTHOR
 
 Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
 
+=head1 ACKNOWLEDGEMENTS
+
+This module was initially developed as part of Hatena Translator
+project.
+
 =head1 LICENSE
 
-Copyright 2010 Hatena <http://www.hatena.ne.jp/>.
+Copyright 2010-2012 Hatena <http://www.hatena.ne.jp/>.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

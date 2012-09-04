@@ -7,6 +7,10 @@ use base qw(Test::Class);
 use Test::More;
 use CSV::Serializer;
 
+sub _version : Test(1) {
+    ok $CSV::Serializer::VERSION;
+}
+
 sub _serialize_line : Test(14) {
     my $class = 'CSV::Serializer';
     
@@ -34,6 +38,13 @@ sub _serialize_lines : Test(3) {
     ) {
         is $class->serialize_lines($_->[0]), $_->[1];
     }
+}
+
+sub _replace_newlines : Test(1) {
+    my $csv = CSV::Serializer->new;
+    $csv->replace_newlines(1);
+    is $csv->serialize_lines([["aaa\x0D\x0Ab\x0Abb", ""], ["a\x0A", "\x0Dbb"]]),
+        qq{"aaa b bb",\x0D\x0A"a "," bb"\x0D\x0A};
 }
 
 __PACKAGE__->runtests;
